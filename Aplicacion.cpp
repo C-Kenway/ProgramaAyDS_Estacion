@@ -20,7 +20,7 @@ int main()
     Reloj HoraEntrada, HoraSalida, Rentrada(8,0), Rsalida1(21,59), Rsalida2(22,0), HorasEstancia;
     int iCont=0, iR=0, IDAutoEntrada, IDAutoSalida, casilla, ic=0, Salida, Entrada, iPosible, Repetido;
     int IDTarjeta, IDEmp, IDPro, IDCli, iC, Tarifa=10, H;
-    string Tienda, Empresa;
+    string Tienda, Empresa,cMatricula;
     char cOpcion,cUsuario;
     aqui:
     string sNombre;
@@ -56,7 +56,10 @@ int main()
             IDTarjeta=atoi(sNombre.c_str());
             sArchivoEntrada>>sNombre;
             IDCli=atoi(sNombre.c_str());
-            listaTarjetas[iCont]=new TarjetaCliente(IDCli,IDTarjeta);
+            getline(sArchivoEntrada,sNombre);
+            cMatricula=sNombre;
+            listaTarjetas[iCont]=new TarjetaCliente(IDCli,IDTarjeta,cMatricula);
+            
         }
         iCont++;//Cantidad de tarjetas que hay
     }
@@ -243,7 +246,7 @@ int main()
 				exit(0); /* abandonamos el programa */
 			}
 			
-			char IDusuario[10],IDtarjeta[10],NomEmpresa[10];
+			char IDusuario[10],IDtarjeta[10],NomEmpresa[10],Matricula[10];
 			
 			 //Despliega menu de opciones al usuario
      	    cout << "c. Cliente " << endl;
@@ -268,6 +271,12 @@ int main()
 					fprintf(archivo," ");
 					scanf(" %s", &IDusuario);
 					fprintf(archivo,IDusuario);	
+					printf("\n Ingrese la matricula del Auto: ");
+					fprintf(archivo," ");
+					scanf(" %s", &Matricula);
+					fprintf(archivo,Matricula);	
+					break;
+					break;
 				case 'e':
 					printf("\n \t Registro de usuario tipo Empleado\n\n");
 					fprintf(archivo,"\n");
@@ -280,7 +289,7 @@ int main()
 					fprintf(archivo," ");
 					scanf(" %s", &IDusuario);
 					fprintf(archivo,IDusuario);	
-					printf("\n Ingrese la empresa: ");
+					printf("\n Ingrese la tienda: ");
 					fprintf(archivo," ");
 					scanf(" %s", &NomEmpresa);
 					fprintf(archivo,NomEmpresa);	
